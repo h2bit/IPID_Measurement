@@ -11,8 +11,8 @@ from scapy.all import *
 from scapy.layers.inet import *
 from scapy.layers.l2 import *
 
-my_extra_ip = '152.136.160.194'
-my_intra_ip = '172.21.0.52'
+my_extra_ip = '49.51.179.226'
+my_intra_ip = '172.26.16.15'
 
 z_payload = b''
 reader = None
@@ -45,10 +45,10 @@ def prob_thread_template(nu):
                  started_callback=lambda: requests.get('http://' + ip, timeout=(5, 5)))
             
             if len(pkts) >= 5:
-                print(str(nu * 1000 + i) + ': ' + ip + ' ' + t + 'fragment')
+                print(str(nu * 1000 + i) + ': ' + ip + ' ' + t + ' fragment')
                 result.append(t)
-            
-            print(str(nu * 1000 + i) + ': ' + ip + ' ' + t)
+            else: 
+                print(str(nu * 1000 + i) + ': ' + ip + ' ' + t)
 
         except Exception as e:
             print(str(nu * 1000 + i) + ': ' + t + ' unaccessable')
