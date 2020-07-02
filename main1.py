@@ -6,7 +6,7 @@ from scapy.all import *
 from scapy.layers.inet import *
 from scapy.layers.l2 import *
 
-n_send = 500
+n_send = 100
 tar = ['www.zhihu.com']
 my_extra_ip = '152.136.160.194'
 my_intra_ip = '172.21.0.52'
