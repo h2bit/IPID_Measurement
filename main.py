@@ -50,7 +50,8 @@ for t in tar:
         print(t + ' unaccessable')
         n_un_accessable += 1
 
-jstr = json.dumps({'res': result, 'n_unaccess': n_un_accessable})
+jstr = json.dumps({'res': result, 'n_unaccess': n_un_accessable, 'n_res': len(result)})
+print(len(result))
 
 with open('res.json', 'w') as f:
     f.write(jstr)
