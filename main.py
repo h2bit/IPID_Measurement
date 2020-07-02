@@ -10,14 +10,18 @@ from scapy.all import *
 from scapy.layers.inet import *
 from scapy.layers.l2 import *
 
+my_extra_ip = '152.136.160.194'
+my_intra_ip = '172.21.0.52'
+number = 1
+
 tar = []
 result = []
 n_un_accessable = 0
 
 with open('top-1m.csv', 'r') as f:
     reader = csv.reader(f)
-    res = list(reader)[:1000]
-    for i in range(0, 1000):
+    res = list(reader)[number * 10000: (number + 1) * 10000]
+    for i in range(0, 10000):
         tar.append(res[i][1])
 
 z_payload = b''
@@ -30,8 +34,6 @@ for t in tar:
         print(ip + ' ' + t)
         response = requests.get('http://' + ip, timeout=(5, 5))
 
-        my_extra_ip = '152.136.160.194'
-        my_intra_ip = '172.21.0.52'
         send(IP(src=my_intra_ip, dst=ip) /
             ICMP(type=3, code=4, nexthopmtu=68) /
             IP(flags=2, src=ip, dst=my_extra_ip) /
@@ -43,7 +45,6 @@ for t in tar:
         if len(pkts) >= 5:
             print(t + ' fragment')
             result.append(t)
-
 
     except Exception as e:
         print(t + ' unaccessable')
